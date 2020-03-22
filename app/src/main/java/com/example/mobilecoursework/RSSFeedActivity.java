@@ -1,17 +1,17 @@
 package com.example.mobilecoursework;
 
 import android.app.ListActivity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,10 +24,12 @@ import java.util.Locale;
 public class RSSFeedActivity extends ListActivity {
 
     private ProgressBar pDialog;
-    ArrayList<HashMap<String, String>> rssItemList = new ArrayList<>();
+    List<HashMap<String, String>> rssItemList = new ArrayList<>();
     RSSparser rssParser = new RSSparser();
     List<RssItems> rssItems = new ArrayList<>();
+   private ListAdapter adapter;
 
+//TODO GET SEARCH FUNCTIONALITY WORKING BEFORE DOING ANYTHING ELSE
     private static String TAG_TITLE = "title";
     private static String TAG_DESCRIPTION = "description";
     private static String TAG_PUB_DATE = "pubDate";
@@ -42,16 +44,6 @@ public class RSSFeedActivity extends ListActivity {
         new LoadRSSFeedItems().execute(rss_link);
         ListView lv = getListView();
 
-/*        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Intent in = new Intent(getApplicationContext(), RSSFeedActivity.class);
-                String page_url = ((TextView) view.findViewById(R.id.rssTitle)).getText().toString();
-                in.putExtra("url", page_url);
-                startActivity(in);
-            }
-        });*/
     }
 
     private class LoadRSSFeedItems extends AsyncTask<String, String, String>{
@@ -94,6 +86,7 @@ public class RSSFeedActivity extends ListActivity {
                     SimpleDateFormat sdf2 = new SimpleDateFormat("EEEE, dd MMMM yyyy - hh:mm a", Locale.UK);
                     item.pubdate = sdf2.format(mDate);
 
+
                 } catch (ParseException e) {
                     e.printStackTrace();
 
@@ -101,7 +94,6 @@ public class RSSFeedActivity extends ListActivity {
                 map.put(TAG_TITLE, item.title);
                 map.put(TAG_DESCRIPTION, item.description);
                 map.put(TAG_PUB_DATE, item.pubdate);
-                //map.put(TAG_LINK, item.description);
 
 
                 rssItemList.add(map);
@@ -110,7 +102,7 @@ public class RSSFeedActivity extends ListActivity {
 
             runOnUiThread(new Runnable() {
                 public void run() {
-                    ListAdapter adapter = new SimpleAdapter(
+                    adapter = new SimpleAdapter(
                             RSSFeedActivity.this,
                             rssItemList, R.layout.rss_item_list_row,
                             new String[]{TAG_DESCRIPTION, TAG_TITLE, TAG_PUB_DATE},

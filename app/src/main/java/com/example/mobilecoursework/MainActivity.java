@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getApplicationContext(), RSSFeedActivity.class);
-            openMapActivity();
+            Intent map = new Intent(getApplicationContext(), BasicMapActivity.class);
             switch (view.getId()) {
                 case R.id.roadworks:
                     intent.putExtra("rssLink", rssLinks.get(1));
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                     break;
                 case R.id.map:
-                    openMapActivity();
+                    startActivity(map);
 
 
 
@@ -60,8 +60,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
-        public void openMapActivity(){
-            Intent map = new Intent(getApplicationContext(), BasicMapActivity.class);
-            startActivity(map);
-        }
+
     }

@@ -11,6 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24dp"/>
+
+    <EditText
+        android:id="@+id/filter"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
     <ListView
         android:id="@android:id/list"
         android:paddingTop="30dp"
