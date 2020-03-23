@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 
-    <ListView
+    <view class="androidx.appcompat.app.AlertController$RecycleListView"
         android:id="@android:id/list"
         android:paddingTop="30dp"
         android:layout_width="match_parent"

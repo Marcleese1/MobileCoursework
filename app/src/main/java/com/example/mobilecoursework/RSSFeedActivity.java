@@ -1,17 +1,21 @@
 package com.example.mobilecoursework;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
+
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +24,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+
+
 
 public class RSSFeedActivity extends ListActivity {
 
@@ -30,20 +36,41 @@ public class RSSFeedActivity extends ListActivity {
    private ListAdapter adapter;
 
 //TODO GET SEARCH FUNCTIONALITY WORKING BEFORE DOING ANYTHING ELSE
+
     private static String TAG_TITLE = "title";
     private static String TAG_DESCRIPTION = "description";
     private static String TAG_PUB_DATE = "pubDate";
     private static String TAG_LINK = "link";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rsfeed);
 
+        EditText filter = (EditText) findViewById(R.id.filter);
+        ListView list = findViewById(android.R.id.list);
         String rss_link = getIntent().getStringExtra("rssLink");
         new LoadRSSFeedItems().execute(rss_link);
         ListView lv = getListView();
 
+
+        filter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ((SimpleAdapter)RSSFeedActivity.this.adapter).getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private class LoadRSSFeedItems extends AsyncTask<String, String, String>{
