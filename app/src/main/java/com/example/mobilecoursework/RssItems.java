@@ -1,10 +1,5 @@
 package com.example.mobilecoursework;
 
-import android.app.Activity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-
 public class RssItems {
 
     public String title;

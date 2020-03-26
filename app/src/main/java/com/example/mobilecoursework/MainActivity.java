@@ -44,12 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btnRoadworks = findViewById(R.id.roadworks);
         Button btnPlanned = findViewById(R.id.planned);
         Button btnCurrent = findViewById(R.id.current);
-//        Button map = findViewById(R.id.map);
 
         btnRoadworks.setOnClickListener(this);
         btnPlanned.setOnClickListener(this);
         btnCurrent.setOnClickListener(this);
-//        map.setOnClickListener(this);
 
         rssLinks.add("https://trafficscotland.org/rss/feeds/plannedroadworks.aspx");
         rssLinks.add("https://trafficscotland.org/rss/feeds/roadworks.aspx");
@@ -73,11 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra("rssLink", rssLinks.get(2));
                     startActivity(intent);
                     break;
-               /* case R.id.map:
-                    intent.putExtra("rssLink", rssLinks.get(1));
-                    intent.putExtra("rssLink", rssLinks.get(2));
-                    startActivity(map);
-*/
+
 
 
 
