@@ -36,7 +36,7 @@ public class RSSparser {
     private static String TAG_DESRIPTION = "description";
     private static String TAG_ITEM = "item";
     private static String TAG_PUB_DATE = "pubDate";
-    private static String TAG_GEORS = "geors";
+    private static String TAG_GEORSS = "georss:point";
 
     public RSSparser() {
 
@@ -61,9 +61,9 @@ public class RSSparser {
                     String link = this.getValue(e1, TAG_LINK);
                     String description = this.getValue(e1, TAG_DESRIPTION);
                     String pubdate = this.getValue(e1, TAG_PUB_DATE);
-                    String guid = this.getValue(e1, TAG_GEORS);
+                    String georss = this.getValue(e1, TAG_GEORSS);
 
-                    RssItems rssItem = new RssItems(title, link, description, pubdate, guid);
+                    RssItems rssItem = new RssItems(title, link, description, pubdate, georss);
                     // adding item to list
                     itemsList.add(rssItem);
                 }

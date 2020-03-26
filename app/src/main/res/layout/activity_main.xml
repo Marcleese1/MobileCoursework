@@ -13,17 +13,17 @@
             android:layout_marginBottom="255dp"
             android:text="Roadworks" />
 
-        <Button
-            android:id="@+id/planned"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/roadworks"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/roadworks"
-            android:layout_marginBottom="178dp"
-            android:text="Planned Roadworks" />
+    <Button
+        android:id="@+id/planned"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/roadworks"
+        android:layout_alignLeft="@+id/roadworks"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="178dp"
+        android:text="Planned Roadworks" />
 
-        <Button
+    <Button
             android:id="@+id/current"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -31,9 +31,9 @@
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/planned"
             android:layout_marginBottom="101dp"
-            android:text="Current Roadworks"/>
+            android:text="Current Incidents"/>
 
-        <Button
+ <!--       <Button
             android:id="@+id/map"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -41,7 +41,9 @@
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/planned"
             android:layout_marginBottom="28dp"
-            android:text="Map"/>
+            android:text="Map"/>-->
+
+
     </RelativeLayout>
 
 
