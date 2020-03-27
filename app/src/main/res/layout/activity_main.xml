@@ -1,39 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+   >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+
 
         <Button
             android:id="@+id/roadworks"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="255dp"
-            android:text="Roadworks" />
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginHorizontal="100dp"
+            android:layout_marginStart="124dp"
+            android:layout_marginTop="58dp"
+            android:layout_marginEnd="100dp"
+            android:background="@drawable/roadworks" />
 
-    <Button
-        android:id="@+id/planned"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/roadworks"
-        android:layout_alignLeft="@+id/roadworks"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="178dp"
-        android:text="Planned Roadworks" />
+        <Button
+            android:id="@+id/planned"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/roadworks"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="100dp"
+            android:layout_marginStart="123dp"
+            android:layout_marginTop="75dp"
+            android:background="@drawable/planned_roadworks" />
 
-    <Button
+        <Button
             android:id="@+id/current"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/planned"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/planned"
+            android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/planned"
-            android:layout_marginBottom="101dp"
-            android:text="Current Incidents"/>
+            android:layout_marginStart="122dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginBottom="67dp"
+            android:background="@drawable/current_incidents" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="123dp"
+            android:layout_marginTop="11dp"
+            android:text="Roadworks"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="107dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginEnd="119dp"
+            android:text="Planned Roadworks"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="106dp"
+            android:layout_marginBottom="219dp"
+            android:text="Current Incidents"
+            android:textSize="25dp" />
 
 
     </RelativeLayout>
+
+
+</RelativeLayout>
 
 

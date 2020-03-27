@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getApplicationContext(), RSSFeedActivity.class);
-            Intent map = new Intent(getApplicationContext(), MapsActivity.class);
             switch (view.getId()) {
                 case R.id.roadworks:
                     intent.putExtra("rssLink", rssLinks.get(1));
