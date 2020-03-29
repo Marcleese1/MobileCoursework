@@ -1,16 +1,12 @@
 package com.example.mobilecoursework;
 
-import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.icu.util.LocaleData;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.EventLogTags;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -25,17 +21,15 @@ import androidx.annotation.RequiresApi;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import static com.example.mobilecoursework.R.*;
+import static com.example.mobilecoursework.R.id;
+import static com.example.mobilecoursework.R.layout;
 
 
 public class RSSFeedActivity extends ListActivity {
@@ -53,7 +47,6 @@ public class RSSFeedActivity extends ListActivity {
     private static String TAG_TITLE = "title";
     private static String TAG_DESCRIPTION = "description";
     private static String TAG_PUB_DATE = "pubDate";
-    private static String TAG_LINK = "link";
     private static String TAG_GEORSS = "georss:point";
 
 
@@ -70,6 +63,7 @@ public class RSSFeedActivity extends ListActivity {
 
 
 
+
         //on click to take you to the map activity when an item in the list is clicked.
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -82,22 +76,13 @@ public class RSSFeedActivity extends ListActivity {
                 String pubDate = ((TextView) view.findViewById(R.id.pubDate)).getText().toString();
                 String[] PubDate = pubDate.split(", | - ");
                 String pub1 = PubDate[1];
-                String[] Description = Desc.split("<br />");
+                String[] Description = Desc.split("<\n>");
                 String[] latLng = georss.split(" ");
                 double lat = Double.parseDouble(latLng[0]);
                 double lng = Double.parseDouble(latLng[1]);
                 assert rss_link != null;
-                if(rss_link.equals("https://trafficscotland.org/rss/feeds/currentincidents.aspx")){
-                    String desc1 = Description[0];
-                    in.putExtra("desc1", desc1);
-                }
-                else{
-                    String desc1 = Description[0];
-                    String desc2 = Description[1];
-                    String desc3 = Description[2];
-                    String DescComb = desc1 + "\n" + desc2 + "\n" + desc3;
-                    in.putExtra("description", DescComb);
-                }
+
+                in.putExtra("description", Desc);
                 in.putExtra("lat", lat);
                 in.putExtra("lng", lng);
                 in.putExtra("title", title);
@@ -155,20 +140,20 @@ public class RSSFeedActivity extends ListActivity {
             // looping through each item
             for (final RssItems item : rssItems) {
                 // creating new HashMap
-                if (item.title.equals(""))
-                    break;
+              /*  if (item.title.equals(""))
+                    break;*/
                 HashMap<String, String> map = new HashMap<String, String>();
                 HashMap<String, Double> geoRss = new HashMap<>();
 
                 // adding each child node to HashMap key => value
-                String givenDateString = item.pubdate.trim();
+                String givenDateString = item.pubDate.trim();
                 SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 
 
                 try {
                     Date mDate = sdf.parse(givenDateString);
                     SimpleDateFormat sdf2 = new SimpleDateFormat("EEEE, dd MMMM yyyy - hh:mm a", Locale.UK);
-                    item.pubdate = sdf2.format(mDate);
+                    item.pubDate = sdf2.format(mDate);
 
 
 
@@ -180,7 +165,7 @@ public class RSSFeedActivity extends ListActivity {
                 }
                 map.put(TAG_TITLE, item.title);
                 map.put(TAG_DESCRIPTION, item.description);
-                map.put(TAG_PUB_DATE, item.pubdate);
+                map.put(TAG_PUB_DATE, item.pubDate);
                 map.put(TAG_GEORSS, item.georss);
                 item.description.split("<br /");
 
