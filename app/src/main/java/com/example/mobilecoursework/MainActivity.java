@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnPlanned.setOnClickListener(this);
         btnCurrent.setOnClickListener(this);
 
-        rssLinks.add("https://trafficscotland.org/rss/feeds/plannedroadworks.aspx");
         rssLinks.add("https://trafficscotland.org/rss/feeds/roadworks.aspx");
+        rssLinks.add("https://trafficscotland.org/rss/feeds/plannedroadworks.aspx");
         rssLinks.add("https://trafficscotland.org/rss/feeds/currentincidents.aspx");
     }
 
@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(getApplicationContext(), RSSFeedActivity.class);
             switch (view.getId()) {
                 case R.id.roadworks:
-                    intent.putExtra("rssLink", rssLinks.get(1));
+                    intent.putExtra("rssLink", rssLinks.get(0));
                     startActivity(intent);
                     break;
                 case R.id.planned:
-                    intent.putExtra("rssLink", rssLinks.get(0));
+                    intent.putExtra("rssLink", rssLinks.get(1));
                     startActivity(intent);
                     break;
                 case R.id.current:

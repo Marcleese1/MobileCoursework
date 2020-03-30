@@ -4,7 +4,6 @@ public class RssItems {
 
     public String title;
     public String description;
-    public String link;
     public String georss;
     public String pubDate;
 
@@ -16,7 +15,6 @@ public class RssItems {
     public RssItems(String title, String description, String link, String georss, String pubDate){
         this.title = title;
         this.description = description;
-        this.link = link;
         this.georss = georss;
         this.pubDate = pubDate;
     }
@@ -37,13 +35,6 @@ public class RssItems {
         this.description = description;
     }
 
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
 
     public String getGeorss() {
         return georss;
@@ -66,7 +57,6 @@ public class RssItems {
         return "RSSTrafficItems{" +
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", link='" + link + '\'' +
                 ", georss='" + georss + '\'' +
                 ", pubDate='" + pubDate + '\'' +
                 '}';

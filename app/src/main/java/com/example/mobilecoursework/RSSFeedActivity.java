@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -22,7 +23,9 @@ import androidx.annotation.RequiresApi;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +40,7 @@ public class RSSFeedActivity extends ListActivity {
     private ProgressBar pDialog;
     List<HashMap<String, String>> rssItemList = new ArrayList<>();
     RSSparser rssParser = new RSSparser();
+
     List<RssItems> rssItems = new ArrayList<>();
 
     private String date;
@@ -55,11 +59,14 @@ public class RSSFeedActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_rsfeed);
 
-        EditText filter = (EditText) findViewById(id.filter);
+
         ListView list = findViewById(android.R.id.list);
         final String rss_link = getIntent().getStringExtra("rssLink");
         new LoadRSSFeedItems().execute(rss_link);
         ListView lv = getListView();
+
+
+
 
 
 
@@ -76,7 +83,6 @@ public class RSSFeedActivity extends ListActivity {
                 String pubDate = ((TextView) view.findViewById(R.id.pubDate)).getText().toString();
                 String[] PubDate = pubDate.split(", | - ");
                 String pub1 = PubDate[1];
-                String[] Description = Desc.split("<\n>");
                 String[] latLng = georss.split(" ");
                 double lat = Double.parseDouble(latLng[0]);
                 double lng = Double.parseDouble(latLng[1]);
@@ -92,8 +98,10 @@ public class RSSFeedActivity extends ListActivity {
             }
         });
 
+        final EditText filter = (EditText) findViewById(id.filter);
         //methods for the search bar on the list items
         filter.addTextChangedListener(new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -102,6 +110,7 @@ public class RSSFeedActivity extends ListActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ((SimpleAdapter)RSSFeedActivity.this.adapter).getFilter().filter(s);
+
             }
 
             @Override
@@ -143,17 +152,18 @@ public class RSSFeedActivity extends ListActivity {
               /*  if (item.title.equals(""))
                     break;*/
                 HashMap<String, String> map = new HashMap<String, String>();
-                HashMap<String, Double> geoRss = new HashMap<>();
 
                 // adding each child node to HashMap key => value
                 String givenDateString = item.pubDate.trim();
-                SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
+                SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
 
 
                 try {
                     Date mDate = sdf.parse(givenDateString);
-                    SimpleDateFormat sdf2 = new SimpleDateFormat("EEEE, dd MMMM yyyy - hh:mm a", Locale.UK);
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("EEEE, dd MMMM yyyy - hh:mm a", Locale.ENGLISH);
                     item.pubDate = sdf2.format(mDate);
+
+
 
 
 
@@ -167,7 +177,7 @@ public class RSSFeedActivity extends ListActivity {
                 map.put(TAG_DESCRIPTION, item.description);
                 map.put(TAG_PUB_DATE, item.pubDate);
                 map.put(TAG_GEORSS, item.georss);
-                item.description.split("<br /");
+
 
 
 
@@ -183,14 +193,12 @@ public class RSSFeedActivity extends ListActivity {
 
 
 
+
                     adapter = new SimpleAdapter(
                             RSSFeedActivity.this,
                             rssItemList, R.layout.rss_item_list_row,
                             new String[]{TAG_DESCRIPTION, TAG_TITLE, TAG_GEORSS, TAG_PUB_DATE},
                             new int[]{id.description, id.title, id.georss, id.pubDate});
-
-
-
 
 
 
@@ -207,8 +215,18 @@ public class RSSFeedActivity extends ListActivity {
         @Override
         protected void onPostExecute(String args) {
             pDialog.setVisibility(View.GONE);
+            Calendar time = Calendar.getInstance();
+
             //rssItems = rssParser.getRSSFeedItems(args);
 
+
+
+        }
+        public class CustomComparator implements Comparator<RssItems> {// may be it would be Model
+            @Override
+            public int compare(RssItems obj1, RssItems obj2) {
+                return obj1.pubDate.compareTo(obj2.pubDate);// compare two objects
+            }
 
 
         }
