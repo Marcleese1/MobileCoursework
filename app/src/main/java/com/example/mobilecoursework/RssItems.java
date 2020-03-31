@@ -10,9 +10,11 @@ public class RssItems {
 
 
     public RssItems() {
+        this.title = "UNDEFINED";
     }
 
     public RssItems(String title, String description, String link, String georss, String pubDate){
+        super();
         this.title = title;
         this.description = description;
         this.georss = georss;
@@ -54,7 +56,7 @@ public class RssItems {
 
     @Override
     public String toString() {
-        return "RSSTrafficItems{" +
+        return "RSSItems{" +
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", georss='" + georss + '\'' +

@@ -151,12 +151,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
                 assert newDate != null;
                 if (newDate.before(weekDate) || newDate.equals(weekDate)) {
-                    rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 } else if (newDate.after(twoDate) && newDate.before(weekDate)) {
                     rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
 
                 } else {
-                    rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                    rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                 }
 
             } else {
@@ -169,12 +169,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 googleMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
                 assert newDate != null;
                 if (newDate.before(weekDate) || newDate.equals(weekDate)) {
-                    rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 } else if (newDate.after(twoDate) && newDate.before(weekDate)) {
                     rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
 
                 } else {
-                    rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                    rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                 }
             }
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));

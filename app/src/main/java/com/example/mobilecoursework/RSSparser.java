@@ -62,24 +62,27 @@ public class RSSparser {
                     switch (eventType){
                         case XmlPullParser.START_TAG:
                             eleName = parser.getName();
-
                             if(TAG_ITEM.equals(eleName)){
                                 Rssitems = new RssItems();
                                 itemsList.add(Rssitems);
                             }else if (Rssitems != null){
-                                if(TAG_TITLE.equals(eleName)){
-                                    Rssitems.setTitle(parser.nextText());
-                                }else if(TAG_DESRIPTION.equals(eleName)){
-                                    Rssitems.setDescription(parser.nextText().replaceAll("<.*?>", "\n"));
-                                }else if (TAG_PUB_DATE.equals(eleName)){
-                                    Rssitems.setPubDate(parser.nextText());
-                                }else if(TAG_GEORSS.equals(eleName)){
-                                    Rssitems.setGeorss(parser.nextText());
-                                }
+                                String next = parser.nextText();
+                                if(next != null) {
+                                    if (TAG_TITLE.equals(eleName)) {
+                                            Rssitems.setTitle(next);
+                                    } else if (TAG_DESRIPTION.equals(eleName)) {
+                                        Rssitems.setDescription(next.replaceAll("<br />", "\n"));
+                                    } else if (TAG_PUB_DATE.equals(eleName)) {
+                                        Rssitems.setPubDate(next);
+                                    } else if (TAG_GEORSS.equals(eleName)) {
+                                        Rssitems.setGeorss(next);
+                                    }
+                            }
                             }
                             break;
                         }
-                        eventType = parser.next();
+
+                    eventType = parser.next();
                 }
 
             } catch (XmlPullParserException | IOException e) {

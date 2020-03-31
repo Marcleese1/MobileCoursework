@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -24,7 +23,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -109,6 +107,7 @@ public class RSSFeedActivity extends ListActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                 ((SimpleAdapter)RSSFeedActivity.this.adapter).getFilter().filter(s);
 
             }
@@ -215,7 +214,7 @@ public class RSSFeedActivity extends ListActivity {
         @Override
         protected void onPostExecute(String args) {
             pDialog.setVisibility(View.GONE);
-            Calendar time = Calendar.getInstance();
+            //Calendar time = Calendar.getInstance();
 
             //rssItems = rssParser.getRSSFeedItems(args);
 
