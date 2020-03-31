@@ -1,4 +1,6 @@
 package com.example.mobilecoursework;
+//Marc Leese
+//S1827987
 
 import android.Manifest;
 import android.content.Intent;
@@ -170,10 +172,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 assert newDate != null;
                 if (newDate.before(weekDate) || newDate.equals(weekDate)) {
                     rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                } else if (newDate.after(twoDate) && newDate.before(weekDate)) {
+                } else if (newDate.before(twoDate) && newDate.after(weekDate)) {
                     rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
 
-                } else {
+                } else if (newDate.equals(twoDate) || newDate.after(twoDate)){
                     rw.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                 }
             }

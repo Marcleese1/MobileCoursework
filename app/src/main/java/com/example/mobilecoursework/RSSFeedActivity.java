@@ -1,4 +1,6 @@
 package com.example.mobilecoursework;
+//Marc Leese
+//S1827987
 
 import android.app.ListActivity;
 import android.content.Intent;

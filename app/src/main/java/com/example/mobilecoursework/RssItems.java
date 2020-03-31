@@ -1,4 +1,6 @@
 package com.example.mobilecoursework;
+//Marc Leese
+//S1827987
 
 public class RssItems {
 

@@ -1,4 +1,6 @@
 package com.example.mobilecoursework;
+//Marc Leese
+//S1827987
 
 import android.content.Intent;
 import android.os.Bundle;
