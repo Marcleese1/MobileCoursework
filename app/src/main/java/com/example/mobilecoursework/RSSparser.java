@@ -58,7 +58,7 @@ public class RSSparser {
                                     if (TAG_TITLE.equals(eleName)) {
                                             Rssitems.setTitle(next);
                                     } else if (TAG_DESRIPTION.equals(eleName)) {
-                                        Rssitems.setDescription(next.replaceAll("<br />", "\n"));
+                                        Rssitems.setDescription(next);
                                     } else if (TAG_PUB_DATE.equals(eleName)) {
                                         Rssitems.setPubDate(next);
                                     } else if (TAG_GEORSS.equals(eleName)) {

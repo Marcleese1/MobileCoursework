@@ -7,10 +7,31 @@
     android:background="@drawable/customborder"
     android:orientation="vertical">
 
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="166dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="13dp"
+        android:onClick="showDatePicker"
+        android:text="Date Picker" />
+
+    <TextView
+        android:id="@+id/txtSelectedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
     <EditText
         android:id="@+id/filter"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="533dp"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="7dp"
         android:hint="Search for a Road"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"

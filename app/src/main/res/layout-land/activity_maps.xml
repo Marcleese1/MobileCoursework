@@ -1,19 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Marc Leese S1827987-->
-<LinearLayout
+<RelativeLayout
 
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MapsActivity"
-    android:orientation="vertical">
+    android:background="@drawable/customborder"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/middle"
+        android:layout_width="132dp"
+        android:layout_height="59dp"
+
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="47dp"
+        android:text="Well Under Way"
+        android:textColor="#00ff00"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/newest"
+        android:layout_width="90dp"
+        android:layout_height="62dp"
+        android:layout_below="@+id/middle"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="177dp"
+        android:nextFocusRight="@id/middle"
+        android:text="Just Started"
+        android:textColor="#ff0000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/week"
+        android:layout_width="122dp"
+        android:layout_height="46dp"
+        android:layout_below="@+id/newest"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="606dp"
+        android:text="In Progress"
+        android:textColor="#ff6600"
+        android:textSize="20sp" />
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="580dp"
+        android:layout_height="361dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="15dp" />
 
-
-</LinearLayout>
+</RelativeLayout>

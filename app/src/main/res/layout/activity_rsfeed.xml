@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Marc Leese S1827987-->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/relativeLayout"
+    android:id="@+id/linearLayout"
     android:background="@drawable/customborder"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/button"
+        android:text="Date Picker"
+        android:onClick="showDatePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:id="@+id/txtSelectedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayout"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/space"
         android:layout_width="match_parent"
@@ -14,8 +33,8 @@
 
     <EditText
         android:id="@+id/filter"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="392dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/space"
         android:hint="Search for a Road"
         android:paddingLeft="5dp"
@@ -32,6 +51,7 @@
         android:background="@drawable/customborder"
         android:dividerHeight="1dp" />
 
+    </RelativeLayout>
 
-</RelativeLayout>
 
+</LinearLayout>

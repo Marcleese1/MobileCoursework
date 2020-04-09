@@ -42,6 +42,26 @@
         android:layout_below="@+id/description"
         />
 
+    <TextView
+        android:id="@+id/startDate"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@id/georss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/endDate"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@id/startDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+    </TextView>
+
 
 
 </RelativeLayout>

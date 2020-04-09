@@ -2,30 +2,26 @@ package com.example.mobilecoursework;
 //Marc Leese
 //S1827987
 
+import android.app.DatePickerDialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-
-import androidx.annotation.RequiresApi;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -35,17 +31,16 @@ import static com.example.mobilecoursework.R.id;
 import static com.example.mobilecoursework.R.layout;
 
 
-public class RSSFeedActivity extends ListActivity {
+public class RSSFeedActivity extends ListActivity implements DatePickerDialog.OnDateSetListener, AdapterView.OnItemClickListener{
 
     private ProgressBar pDialog;
     List<HashMap<String, String>> rssItemList = new ArrayList<>();
     RSSparser rssParser = new RSSparser();
-
     List<RssItems> rssItems = new ArrayList<>();
+    Date selectedDate;
+    private DatePickerAdapter adapter;
+    private DatePickerAdapter dateadapter;
 
-    private String date;
-
-   private ListAdapter adapter;
 
 
     private static String TAG_TITLE = "title";
@@ -58,19 +53,9 @@ public class RSSFeedActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_rsfeed);
-
-
-        ListView list = findViewById(android.R.id.list);
         final String rss_link = getIntent().getStringExtra("rssLink");
         new LoadRSSFeedItems().execute(rss_link);
         ListView lv = getListView();
-
-
-
-
-
-
-
         //on click to take you to the map activity when an item in the list is clicked.
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -110,7 +95,7 @@ public class RSSFeedActivity extends ListActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                ((SimpleAdapter)RSSFeedActivity.this.adapter).getFilter().filter(s);
+                adapter.getFilter().filter(s);
 
             }
 
@@ -121,7 +106,13 @@ public class RSSFeedActivity extends ListActivity {
         });
     }
 
-    class LoadRSSFeedItems extends AsyncTask<String, String, String>{
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+
+    class LoadRSSFeedItems extends AsyncTask<String, String, String> {
 
 
         @Override
@@ -162,12 +153,8 @@ public class RSSFeedActivity extends ListActivity {
                 try {
                     Date mDate = sdf.parse(givenDateString);
                     SimpleDateFormat sdf2 = new SimpleDateFormat("EEEE, dd MMMM yyyy - hh:mm a", Locale.ENGLISH);
+
                     item.pubDate = sdf2.format(mDate);
-
-
-
-
-
 
 
                 } catch (ParseException e) {
@@ -180,56 +167,76 @@ public class RSSFeedActivity extends ListActivity {
                 map.put(TAG_GEORSS, item.georss);
 
 
-
-
-
                 rssItemList.add(map);
 
 
             }
 
             runOnUiThread(new Runnable() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
                 public void run() {
 
 
-
-
-                    adapter = new SimpleAdapter(
-                            RSSFeedActivity.this,
-                            rssItemList, R.layout.rss_item_list_row,
-                            new String[]{TAG_DESCRIPTION, TAG_TITLE, TAG_GEORSS, TAG_PUB_DATE},
-                            new int[]{id.description, id.title, id.georss, id.pubDate});
-
-
-
-
-
-                    // updating listview
+                    adapter = new DatePickerAdapter(rssItems, getApplicationContext());
                     setListAdapter(adapter);
+
+                    //Search bar
+                    EditText ItemSearch = (EditText)findViewById(R.id.filter);
+                    ItemSearch.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            System.out.println(s);
+                            adapter.getFilter().filter(s);
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+
+                        }
+                    });
+
                 }
             });
-
             return null;
         }
+
 
         @Override
         protected void onPostExecute(String args) {
             pDialog.setVisibility(View.GONE);
-            //Calendar time = Calendar.getInstance();
-
-            //rssItems = rssParser.getRSSFeedItems(args);
-
-
 
         }
-        public class CustomComparator implements Comparator<RssItems> {// may be it would be Model
-            @Override
-            public int compare(RssItems obj1, RssItems obj2) {
-                return obj1.pubDate.compareTo(obj2.pubDate);// compare two objects
-            }
 
-
-        }
     }
+    public void showDatePicker(View v){
+        DatePickerDialog dataPickerDialog =  createDataPickerDialog( v);
+        dataPickerDialog.show();
+    }
+
+    public DatePickerDialog createDataPickerDialog(View v) {
+        // Use the current date as the default date in the picker
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        // Create a new instance of DatePickerDialog and return it
+        return new DatePickerDialog(v.getContext() , this, year, month, day);
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        this.adapter.setSelectedDate(calendar.getTime());
+        TextView textView =  (TextView) findViewById(R.id.txtSelectedDate);
+        textView.setText(calendar.getTime().toString());
+        this.adapter.getFilter().filter("");
+
+    }
+
 }
