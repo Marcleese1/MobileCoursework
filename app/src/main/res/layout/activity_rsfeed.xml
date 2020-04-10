@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Marc Leese S1827987-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linearLayout"
     android:background="@drawable/customborder"
     android:orientation="vertical">
 
+
     <Button
         android:id="@+id/button"
-        android:text="Date Picker"
-        android:onClick="showDatePicker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+        android:layout_width="60dp"
+        android:layout_height="52dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="6dp"
+        android:background="@drawable/calendarvector"
+        android:onClick="showDatePicker" />
 
     <TextView
         android:id="@+id/txtSelectedDate"
@@ -21,20 +25,18 @@
         android:layout_height="wrap_content"
         android:visibility="gone"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/relativeLayout"
-        android:orientation="vertical">
+
     <TextView
         android:id="@+id/space"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:id="@+id/filter"
-        android:layout_width="392dp"
-        android:layout_height="wrap_content"
+        android:layout_width="312dp"
+        android:layout_height="54dp"
         android:layout_below="@+id/space"
         android:hint="Search for a Road"
         android:paddingLeft="5dp"
@@ -51,7 +53,5 @@
         android:background="@drawable/customborder"
         android:dividerHeight="1dp" />
 
-    </RelativeLayout>
 
-
-</LinearLayout>
+</RelativeLayout>
